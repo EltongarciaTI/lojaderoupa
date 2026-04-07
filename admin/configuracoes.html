@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configurações — ModeMan Admin</title>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+<div class="admin-layout">
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <a href="index.html" class="sidebar__logo">
+      <div class="sidebar__logo-text">Mode<span>Man</span></div>
+      <span class="sidebar__logo-badge">Admin</span>
+    </a>
+    <nav class="sidebar__nav">
+      <div class="sidebar__section">
+        <p class="sidebar__section-label">Principal</p>
+        <a href="index.html" class="nav-item">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          Dashboard
+        </a>
+        <a href="pedidos.html" class="nav-item">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Pedidos
+        </a>
+      </div>
+      <div class="sidebar__section">
+        <p class="sidebar__section-label">Catálogo</p>
+        <a href="produtos.html" class="nav-item">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>
+          Produtos
+        </a>
+      </div>
+      <div class="sidebar__section">
+        <p class="sidebar__section-label">Sistema</p>
+        <a href="configuracoes.html" class="nav-item active">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          Configurações
+        </a>
+        <a href="../index.html" target="_blank" class="nav-item">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Ver Loja
+        </a>
+      </div>
+    </nav>
+    <div class="sidebar__footer">
+      <div class="sidebar__user" id="logoutBtn">
+        <div class="sidebar__avatar">A</div>
+        <div class="sidebar__user-info"><strong>Administrador</strong><span>Sair da conta</span></div>
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color:rgba(255,255,255,0.3)"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </div>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+    <div class="admin-topbar">
+      <div class="admin-topbar__left">
+        <button class="hamburger-btn" id="hamburgerBtn">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <span class="admin-topbar__title">Configurações</span>
+      </div>
+    </div>
+
+    <div class="admin-page">
+      <div class="page-header">
+        <div><h1>Configurações</h1><p>Gerencie as informações da sua loja</p></div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr;gap:20px;max-width:680px">
+
+        <!-- WHATSAPP -->
+        <div class="card">
+          <div class="card-header"><h2>WhatsApp</h2></div>
+          <div class="card-body">
+            <div class="form-group">
+              <label class="form-label" for="cfgWhatsapp">Número do WhatsApp</label>
+              <input type="text" id="cfgWhatsapp" class="form-control" placeholder="5511999990000" />
+              <span class="form-hint">Formato: 55 + DDD + número (sem espaços ou traços). Ex: 5511999990000</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cfgMsgPadrao">Mensagem padrão (opcional)</label>
+              <textarea id="cfgMsgPadrao" class="form-control" rows="3" placeholder="Ex: Olá! Vim pelo site e gostaria de mais informações."></textarea>
+              <span class="form-hint">Mensagem que abre junto com os itens do carrinho</span>
+            </div>
+            <button class="btn btn-primary" id="salvarWpp">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              Salvar WhatsApp
+            </button>
+          </div>
+        </div>
+
+        <!-- LOJA -->
+        <div class="card">
+          <div class="card-header"><h2>Informações da Loja</h2></div>
+          <div class="card-body">
+            <div class="form-group">
+              <label class="form-label" for="cfgNomeLoja">Nome da loja</label>
+              <input type="text" id="cfgNomeLoja" class="form-control" placeholder="ModeMan" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cfgEmail">E-mail de contato</label>
+              <input type="email" id="cfgEmail" class="form-control" placeholder="contato@modeman.com.br" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cfgEndereco">Cidade / Estado</label>
+              <input type="text" id="cfgEndereco" class="form-control" placeholder="São Paulo — SP" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cfgHorario">Horário de atendimento</label>
+              <input type="text" id="cfgHorario" class="form-control" placeholder="Seg–Sex, 9h às 18h" />
+            </div>
+            <button class="btn btn-primary" id="salvarLoja">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              Salvar informações
+            </button>
+          </div>
+        </div>
+
+        <!-- BANNER -->
+        <div class="card">
+          <div class="card-header"><h2>Banner da loja</h2></div>
+          <div class="card-body">
+            <div class="form-group">
+              <label class="form-label" for="cfgBanner1">Mensagem 1</label>
+              <input type="text" id="cfgBanner1" class="form-control" placeholder="Frete Grátis acima de R$ 299" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cfgBanner2">Mensagem 2</label>
+              <input type="text" id="cfgBanner2" class="form-control" placeholder="Troca Gratuita em 30 dias" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cfgBanner3">Mensagem 3</label>
+              <input type="text" id="cfgBanner3" class="form-control" placeholder="Pagamento em até 12x sem juros" />
+            </div>
+            <button class="btn btn-primary" id="salvarBanner">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              Salvar banner
+            </button>
+          </div>
+        </div>
+
+        <!-- SENHA -->
+        <div class="card">
+          <div class="card-header"><h2>Segurança</h2></div>
+          <div class="card-body">
+            <div class="form-group">
+              <label class="form-label" for="senhaAtual">Senha atual</label>
+              <input type="password" id="senhaAtual" class="form-control" placeholder="••••••••" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="senhaNova">Nova senha</label>
+              <input type="password" id="senhaNova" class="form-control" placeholder="••••••••" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="senhaConfirm">Confirmar nova senha</label>
+              <input type="password" id="senhaConfirm" class="form-control" placeholder="••••••••" />
+            </div>
+            <div class="alert alert-info" style="margin-bottom:12px">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              A senha padrão é <strong>admin123</strong>. Troque agora por segurança.
+            </div>
+            <button class="btn btn-primary" id="salvarSenha">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+              Alterar senha
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="admin-toast" id="adminToast"></div>
+<script src="admin.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    requireAuth();
+    initSidebar();
+    document.getElementById('logoutBtn').addEventListener('click', logout);
+
+    const cfg = getConfig();
+
+    // Preencher campos
+    document.getElementById('cfgWhatsapp').value  = cfg.whatsapp  || '';
+    document.getElementById('cfgMsgPadrao').value = cfg.msgPadrao || '';
+    document.getElementById('cfgNomeLoja').value  = cfg.nomeLoja  || 'ModeMan';
+    document.getElementById('cfgEmail').value     = cfg.email     || '';
+    document.getElementById('cfgEndereco').value  = cfg.endereco  || '';
+    document.getElementById('cfgHorario').value   = cfg.horario   || '';
+    document.getElementById('cfgBanner1').value   = cfg.banner1   || '';
+    document.getElementById('cfgBanner2').value   = cfg.banner2   || '';
+    document.getElementById('cfgBanner3').value   = cfg.banner3   || '';
+
+    // Salvar WhatsApp
+    document.getElementById('salvarWpp').addEventListener('click', () => {
+      const num = document.getElementById('cfgWhatsapp').value.replace(/\D/g,'');
+      if (!num) { showAdminToast('Informe o número'); return; }
+      saveConfig({ ...getConfig(), whatsapp: num, msgPadrao: document.getElementById('cfgMsgPadrao').value });
+      showAdminToast('WhatsApp salvo! ✓');
+    });
+
+    // Salvar Loja
+    document.getElementById('salvarLoja').addEventListener('click', () => {
+      saveConfig({
+        ...getConfig(),
+        nomeLoja: document.getElementById('cfgNomeLoja').value,
+        email:    document.getElementById('cfgEmail').value,
+        endereco: document.getElementById('cfgEndereco').value,
+        horario:  document.getElementById('cfgHorario').value,
+      });
+      showAdminToast('Informações salvas! ✓');
+    });
+
+    // Salvar Banner
+    document.getElementById('salvarBanner').addEventListener('click', () => {
+      saveConfig({
+        ...getConfig(),
+        banner1: document.getElementById('cfgBanner1').value,
+        banner2: document.getElementById('cfgBanner2').value,
+        banner3: document.getElementById('cfgBanner3').value,
+      });
+      showAdminToast('Banner salvo! ✓');
+    });
+
+    // Alterar senha
+    document.getElementById('salvarSenha').addEventListener('click', () => {
+      const atual    = document.getElementById('senhaAtual').value;
+      const nova     = document.getElementById('senhaNova').value;
+      const confirm  = document.getElementById('senhaConfirm').value;
+      const salva    = localStorage.getItem('mm_admin_pass') || 'admin123';
+
+      if (atual !== salva)   { showAdminToast('Senha atual incorreta'); return; }
+      if (nova.length < 4)   { showAdminToast('Nova senha muito curta'); return; }
+      if (nova !== confirm)  { showAdminToast('Senhas não conferem'); return; }
+
+      localStorage.setItem('mm_admin_pass', nova);
+      document.getElementById('senhaAtual').value   = '';
+      document.getElementById('senhaNova').value    = '';
+      document.getElementById('senhaConfirm').value = '';
+      showAdminToast('Senha alterada com sucesso! ✓');
+    });
+  });
+</script>
+</body>
+</html>

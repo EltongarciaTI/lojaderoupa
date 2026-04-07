@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pedidos — ModeMan Admin</title>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+<div class="admin-layout">
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <a href="index.html" class="sidebar__logo">
+      <div class="sidebar__logo-text">Mode<span>Man</span></div>
+      <span class="sidebar__logo-badge">Admin</span>
+    </a>
+    <nav class="sidebar__nav">
+      <div class="sidebar__section">
+        <p class="sidebar__section-label">Principal</p>
+        <a href="index.html" class="nav-item">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          Dashboard
+        </a>
+        <a href="pedidos.html" class="nav-item active">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Pedidos
+        </a>
+      </div>
+      <div class="sidebar__section">
+        <p class="sidebar__section-label">Catálogo</p>
+        <a href="produtos.html" class="nav-item">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>
+          Produtos
+        </a>
+      </div>
+      <div class="sidebar__section">
+        <p class="sidebar__section-label">Sistema</p>
+        <a href="configuracoes.html" class="nav-item">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          Configurações
+        </a>
+        <a href="../index.html" target="_blank" class="nav-item">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Ver Loja
+        </a>
+      </div>
+    </nav>
+    <div class="sidebar__footer">
+      <div class="sidebar__user" id="logoutBtn">
+        <div class="sidebar__avatar">A</div>
+        <div class="sidebar__user-info"><strong>Administrador</strong><span>Sair da conta</span></div>
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color:rgba(255,255,255,0.3)"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </div>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+    <div class="admin-topbar">
+      <div class="admin-topbar__left">
+        <button class="hamburger-btn" id="hamburgerBtn">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <span class="admin-topbar__title">Pedidos</span>
+      </div>
+      <div class="admin-topbar__right">
+        <button class="btn btn-outline btn-sm" id="limparPedidosBtn">Limpar histórico</button>
+      </div>
+    </div>
+
+    <div class="admin-page">
+      <div class="page-header">
+        <div>
+          <h1>Pedidos via WhatsApp</h1>
+          <p>Pedidos gerados quando clientes clicam em "Finalizar no WhatsApp"</p>
+        </div>
+      </div>
+
+      <!-- RESUMO -->
+      <div class="stats-grid" style="margin-bottom:20px">
+        <div class="stat-card">
+          <div class="stat-card__icon stat-card__icon--gold">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          </div>
+          <div class="stat-card__body">
+            <p class="stat-card__label">Total de pedidos</p>
+            <p class="stat-card__value" id="totalPedidos">0</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__icon stat-card__icon--green">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          </div>
+          <div class="stat-card__body">
+            <p class="stat-card__label">Receita total</p>
+            <p class="stat-card__value" id="receitaTotal">R$ 0</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__icon stat-card__icon--blue">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="stat-card__body">
+            <p class="stat-card__label">Pedidos hoje</p>
+            <p class="stat-card__value" id="pedidosHoje">0</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__icon stat-card__icon--yellow">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          </div>
+          <div class="stat-card__body">
+            <p class="stat-card__label">Ticket médio</p>
+            <p class="stat-card__value" id="ticketMedio">R$ 0</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TABELA -->
+      <div class="card">
+        <div class="card-header">
+          <h2>Histórico de pedidos</h2>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Data / Hora</th>
+                <th>Produtos</th>
+                <th>Total</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="pedidosBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- MODAL DETALHE DO PEDIDO -->
+<div class="modal-overlay" id="detalheOverlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Detalhes do Pedido</h3>
+      <button class="modal-close" id="detalheClose">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="detalheBody"></div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" id="detalheCancelar">Fechar</button>
+      <a class="btn btn-success" id="responderWpp" href="#" target="_blank">
+        <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+        Responder no WhatsApp
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="admin-toast" id="adminToast"></div>
+<script src="admin.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    requireAuth();
+    initSidebar();
+    document.getElementById('logoutBtn').addEventListener('click', logout);
+
+    const config = getConfig();
+    let pedidos = getPedidos();
+
+    function render() {
+      pedidos = getPedidos();
+      const hoje = new Date().toDateString();
+      const pedidosHojeArr = pedidos.filter(p => new Date(p.data).toDateString() === hoje);
+      const receita = pedidos.reduce((s, p) => s + p.total, 0);
+      const receitaHojeVal = pedidosHojeArr.reduce((s, p) => s + p.total, 0);
+
+      document.getElementById('totalPedidos').textContent = pedidos.length;
+      document.getElementById('receitaTotal').textContent = fmt(receita);
+      document.getElementById('pedidosHoje').textContent = pedidosHojeArr.length;
+      document.getElementById('ticketMedio').textContent = pedidos.length ? fmt(receita / pedidos.length) : 'R$ 0';
+
+      const tbody = document.getElementById('pedidosBody');
+      tbody.innerHTML = '';
+
+      if (pedidos.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5">
+          <div class="empty-state">
+            <span class="empty-state__icon">📦</span>
+            <h3>Nenhum pedido ainda</h3>
+            <p>Os pedidos aparecem aqui quando clientes finalizarem no WhatsApp.</p>
+          </div>
+        </td></tr>`;
+        return;
+      }
+
+      pedidos.forEach((p, i) => {
+        const data = new Date(p.data);
+        const isHoje = data.toDateString() === hoje;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong style="color:var(--text-muted)">#${pedidos.length - i}</strong></td>
+          <td>
+            <div>${data.toLocaleDateString('pt-BR')}</div>
+            <div style="font-size:0.75rem;color:var(--text-muted)">${data.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}</div>
+            ${isHoje ? '<span class="td-badge badge-green" style="font-size:0.6rem;margin-top:2px">Hoje</span>' : ''}
+          </td>
+          <td>
+            ${p.itens.slice(0,2).map(it => `<div style="font-size:0.8rem">${it.nome}${it.tamanho ? ` (${it.tamanho})` : ''} x${it.qty}</div>`).join('')}
+            ${p.itens.length > 2 ? `<span style="font-size:0.74rem;color:var(--text-muted)">+${p.itens.length - 2} mais</span>` : ''}
+          </td>
+          <td><strong>${fmt(p.total)}</strong></td>
+          <td>
+            <div class="td-actions">
+              <button class="btn btn-outline btn-sm ver-btn" data-idx="${i}">Ver</button>
+              <a class="btn btn-success btn-sm" href="${gerarLinkWpp(p, config.whatsapp)}" target="_blank">
+                <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+                WhatsApp
+              </a>
+            </div>
+          </td>`;
+        tbody.appendChild(tr);
+      });
+
+      tbody.querySelectorAll('.ver-btn').forEach(btn => {
+        btn.addEventListener('click', () => abrirDetalhe(pedidos[parseInt(btn.dataset.idx)]));
+      });
+    }
+
+    function gerarLinkWpp(pedido, numero) {
+      const linhas = pedido.itens.map(it => `• ${it.nome}${it.tamanho ? ` (${it.tamanho})` : ''} x${it.qty} — ${fmt(it.preco * it.qty)}`);
+      const msg = `Olá! Sobre o pedido de ${new Date(pedido.data).toLocaleDateString('pt-BR')}:\n\n` + linhas.join('\n') + `\n\n*Total: ${fmt(pedido.total)}*`;
+      return `https://wa.me/${numero || '5511999990000'}?text=${encodeURIComponent(msg)}`;
+    }
+
+    function abrirDetalhe(pedido) {
+      const body = document.getElementById('detalheBody');
+      body.innerHTML = `
+        <p style="font-size:0.78rem;color:var(--text-muted);margin-bottom:16px">
+          ${new Date(pedido.data).toLocaleString('pt-BR')}
+        </p>
+        <table style="width:100%;font-size:0.85rem;border-collapse:collapse">
+          <thead><tr>
+            <th style="text-align:left;padding:6px 8px;background:var(--bg);font-size:0.72rem;color:var(--text-muted);text-transform:uppercase">Produto</th>
+            <th style="text-align:center;padding:6px 8px;background:var(--bg);font-size:0.72rem;color:var(--text-muted);text-transform:uppercase">Tam.</th>
+            <th style="text-align:center;padding:6px 8px;background:var(--bg);font-size:0.72rem;color:var(--text-muted);text-transform:uppercase">Qtd</th>
+            <th style="text-align:right;padding:6px 8px;background:var(--bg);font-size:0.72rem;color:var(--text-muted);text-transform:uppercase">Total</th>
+          </tr></thead>
+          <tbody>
+            ${pedido.itens.map(it => `
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:8px">${it.nome}</td>
+                <td style="text-align:center;padding:8px">${it.tamanho || '—'}</td>
+                <td style="text-align:center;padding:8px">${it.qty}</td>
+                <td style="text-align:right;padding:8px;font-weight:600">${fmt(it.preco * it.qty)}</td>
+              </tr>`).join('')}
+          </tbody>
+        </table>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 8px 0;border-top:2px solid var(--border);margin-top:8px">
+          <strong>Total do pedido</strong>
+          <strong style="font-size:1.1rem;color:var(--text)">${fmt(pedido.total)}</strong>
+        </div>`;
+      document.getElementById('responderWpp').href = gerarLinkWpp(pedido, config.whatsapp);
+      document.getElementById('detalheOverlay').classList.add('open');
+    }
+
+    document.getElementById('detalheClose').addEventListener('click', () => document.getElementById('detalheOverlay').classList.remove('open'));
+    document.getElementById('detalheCancelar').addEventListener('click', () => document.getElementById('detalheOverlay').classList.remove('open'));
+
+    document.getElementById('limparPedidosBtn').addEventListener('click', () => {
+      if (confirm('Limpar todo o histórico de pedidos?')) {
+        localStorage.removeItem('mm_pedidos');
+        render();
+        showAdminToast('Histórico limpo');
+      }
+    });
+
+    render();
+  });
+</script>
+</body>
+</html>
