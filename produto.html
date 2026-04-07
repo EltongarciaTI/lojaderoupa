@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Produto — ModeMan</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+</head>
+<body data-page="produto">
+
+  <!-- ========== TOPBAR ========== -->
+  <header class="topbar topbar--light scrolled" id="topbar">
+    <div class="topbar__inner">
+      <a href="index.html" class="topbar__logo topbar__logo--dark">Mode<span>Man</span></a>
+      <nav class="topbar__nav topbar__nav--dark">
+        <a href="index.html">Início</a>
+        <a href="produtos.html" class="active">Produtos</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="sobre.html#contato">Contato</a>
+      </nav>
+      <div class="topbar__actions">
+        <a href="produtos.html" class="icon-btn icon-btn--dark" aria-label="Voltar">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        </a>
+        <button class="icon-btn icon-btn--dark" id="cartBtn" aria-label="Carrinho" style="position:relative">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="cart-badge" id="cartCount"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main class="produto-page" id="produtoPage">
+
+    <!-- BREADCRUMB -->
+    <div class="container" style="padding-top:80px">
+      <div class="breadcrumb breadcrumb--light" id="breadcrumb">
+        <a href="index.html">Início</a>
+        <span class="sep">/</span>
+        <a href="produtos.html">Produtos</a>
+        <span class="sep">/</span>
+        <span id="breadcrumbNome">...</span>
+      </div>
+    </div>
+
+    <!-- PRODUTO DETALHE -->
+    <div class="container">
+      <div class="produto-detalhe">
+
+        <!-- IMAGEM -->
+        <div class="produto-detalhe__img" id="produtoImg">
+          <!-- FOTO: o JS preenche src com imgs/produto-{id}.jpg -->
+          <img id="produtoFoto" src="" alt="" class="produto-detalhe__photo" />
+          <button class="produto-card__wish produto-wish-btn" id="wishBtn" aria-label="Favoritar">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+        </div>
+
+        <!-- INFO -->
+        <div class="produto-detalhe__info">
+          <p class="produto-detalhe__cat" id="produtoCat"></p>
+          <h1 class="produto-detalhe__nome" id="produtoNome"></h1>
+
+          <div class="produto-detalhe__preco">
+            <span class="preco-atual" id="produtoPreco"></span>
+            <span class="preco-original" id="produtoPrecoOrig" style="display:none"></span>
+          </div>
+
+          <p class="produto-detalhe__desc" id="produtoDesc"></p>
+
+          <!-- TAMANHO -->
+          <div class="produto-detalhe__sizes">
+            <p class="size-label">Tamanho <span id="tamanhoSelecionado" style="color:var(--gold)"></span></p>
+            <div class="size-grid" id="sizeGrid">
+              <button class="size-btn" data-size="PP">PP</button>
+              <button class="size-btn" data-size="P">P</button>
+              <button class="size-btn" data-size="M">M</button>
+              <button class="size-btn" data-size="G">G</button>
+              <button class="size-btn" data-size="GG">GG</button>
+              <button class="size-btn" data-size="XG">XG</button>
+            </div>
+          </div>
+
+          <!-- QTD -->
+          <div class="qty-row">
+            <span>Quantidade</span>
+            <div class="qty-control">
+              <button id="qtyDec">−</button>
+              <span id="qtyVal">1</span>
+              <button id="qtyInc">+</button>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <button class="btn btn-primary btn-full btn-lg" id="addCartBtn">
+            Adicionar ao Carrinho
+          </button>
+          <div style="height:8px"></div>
+          <button class="btn btn-ghost btn-full" id="wishBtnAlt">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            Adicionar aos favoritos
+          </button>
+        </div>
+
+        <!-- ACCORDION INFO -->
+        <div class="produto-accordion" id="produtoAcordion">
+          <div class="accordion-item">
+            <button class="accordion-btn">
+              Descrição do produto
+              <span class="accordion-icon"></span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body__inner" id="acordionDesc">
+                Peça de alta qualidade com acabamento premium. Confeccionada com tecidos selecionados para garantir conforto e durabilidade. Ideal para diversas ocasiões do dia a dia.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-btn">
+              Guia de tamanhos
+              <span class="accordion-icon"></span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body__inner">
+                <strong>PP</strong> — Tórax até 88cm &nbsp;|&nbsp; <strong>P</strong> — 88–92cm<br/>
+                <strong>M</strong> — 92–96cm &nbsp;|&nbsp; <strong>G</strong> — 96–100cm<br/>
+                <strong>GG</strong> — 100–106cm &nbsp;|&nbsp; <strong>XG</strong> — 106–112cm<br/><br/>
+                Em caso de dúvida, escolha um tamanho acima.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-btn">
+              Entrega e devolução
+              <span class="accordion-icon"></span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body__inner">
+                Entrega em todo o Brasil. Frete grátis para compras acima de R$&nbsp;299.<br/>
+                Prazo: 3 a 7 dias úteis.<br/>
+                Troca ou devolução gratuita em até 30 dias.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RELACIONADOS -->
+    <section class="section" style="padding-top:32px">
+      <div class="container">
+        <div class="section-header section-header--left">
+          <p class="section-tag">Você também pode gostar</p>
+          <h2>Relacionados</h2>
+        </div>
+        <div class="h-scroll-wrap">
+          <div class="h-scroll" id="relacionadosGrid"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== STICKY CTA (mobile) ========== -->
+  <div class="sticky-cta" id="stickyCta">
+    <div>
+      <p style="font-size:.72rem;color:var(--text-muted);margin-bottom:2px" id="ctaNome"></p>
+      <span class="sticky-cta__price" id="ctaPreco"></span>
+    </div>
+    <button class="btn btn-primary" id="ctaAddCart">Adicionar ao Carrinho</button>
+  </div>
+
+  <!-- ========== BOTTOM NAV (mobile) ========== -->
+  <nav class="bottom-nav">
+    <div class="bottom-nav__items">
+      <a href="index.html" class="bottom-nav__item">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Início</span>
+      </a>
+      <a href="produtos.html" class="bottom-nav__item active">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Explorar</span>
+      </a>
+      <button class="bottom-nav__item" id="wishlistNavBtn">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        <span>Favoritos</span>
+      </button>
+      <button class="bottom-nav__item" id="cartNavBtn" style="position:relative">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span class="cart-badge" id="cartCountNav"></span>
+        <span>Carrinho</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========== CART OVERLAY ========== -->
+  <div class="cart-overlay" id="cartOverlay">
+    <div class="cart-sheet">
+      <div class="cart-handle"></div>
+      <div class="cart-header">
+        <h3>Carrinho</h3>
+        <button id="closeCart" aria-label="Fechar">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="cart-items" id="cartItems"></div>
+      <div class="cart-footer" id="cartFooter">
+        <div class="cart-total">
+          <span>Total</span>
+          <strong id="cartTotal">R$ 0,00</strong>
+        </div>
+        <button class="btn btn-primary btn-full" id="checkoutBtn">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M5.077 2H2v21.535L5 21h16.077A2.923 2.923 0 0024 18.077V5.923A2.923 2.923 0 0021.077 3H5.923A2.923 2.923 0 003 5.923"/></svg>
+          Finalizar no WhatsApp
+        </button>
+        <button class="cart-clear-btn" id="clearCart">Limpar carrinho</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== TOAST ========== -->
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
