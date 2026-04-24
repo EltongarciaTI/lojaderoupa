@@ -123,7 +123,7 @@ function renderizarCarrinho() {
     div.className = 'cart-item';
     div.innerHTML = `
       <div class="cart-item__img">
-        <img src="${getProdutoImg(item.id)}" alt="${item.nome}" class="cart-item__photo" />
+        <img src="${getProdutoImg(item.id)}" onerror="onImgError(this,${item.id},64,64)" alt="${item.nome}" class="cart-item__photo" />
       </div>
       <div class="cart-item__info">
         <p class="cart-item__name">${item.nome}</p>
@@ -182,9 +182,22 @@ function finalizarCompra() {
   window.open(`https://wa.me/${numero}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
-// Imagem do produto: usa upload do admin se disponível, senão arquivo local
+// Imagem do produto: usa upload do admin se disponível, senão arquivo local, senão placeholder
+const PRODUCT_PHOTO_TERMS = [
+  'men,dress,shirt','men,jeans,slim','men,white,tshirt','men,bomber,jacket',
+  'men,polo,shirt','men,cargo,shorts','men,print,tshirt','men,dress,trousers',
+  'men,denim,jacket','men,linen,shirt','men,surf,shorts','men,black,tshirt',
+];
 function getProdutoImg(id) {
   return localStorage.getItem(`mm_img_${id}`) || `imgs/produto-${id}.jpg`;
+}
+function getFallbackImg(id, w = 400, h = 500) {
+  const term = PRODUCT_PHOTO_TERMS[(id - 1) % PRODUCT_PHOTO_TERMS.length] || 'men,fashion';
+  return `https://loremflickr.com/${w}/${h}/${term}?lock=${id * 17}`;
+}
+function onImgError(img, id, w, h) {
+  img.onerror = null;
+  img.src = getFallbackImg(id, w, h);
 }
 
 // ===== CART: OPEN / CLOSE =====
@@ -234,8 +247,7 @@ function criarCard(p, opts = {}) {
 
   div.innerHTML = `
     <div class="produto-card__img">
-      <!-- FOTO ${p.id}: coloque o arquivo imgs/produto-${p.id}.jpg -->
-      <img src="${getProdutoImg(p.id)}" alt="${p.nome}" class="produto-card__photo" />
+      <img src="${getProdutoImg(p.id)}" onerror="onImgError(this,${p.id},400,500)" alt="${p.nome}" class="produto-card__photo" />
       ${badgeHtml}
       <button class="produto-card__wish${favAtivo ? ' active' : ''}" data-id="${p.id}" aria-label="Favoritar">
         <svg width="16" height="16" fill="${favAtivo ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
@@ -444,6 +456,7 @@ function initProduto() {
   if (fotoEl) {
     fotoEl.src = getProdutoImg(produto.id);
     fotoEl.alt = produto.nome;
+    fotoEl.onerror = () => onImgError(fotoEl, produto.id, 600, 700);
   }
 
   // Info
@@ -575,6 +588,71 @@ function initSobre() {
   }
 }
 
+// ===== SCROLL REVEAL ANIMATIONS =====
+function initRevealAnimations() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.animate-in, .animate-fade').forEach(el => observer.observe(el));
+}
+
+// ===== ANIMATED NUMBER COUNTERS =====
+function animateCounter(el, targetText) {
+  const isRating = targetText.includes('★');
+  const isK      = targetText.includes('k');
+  const raw      = parseFloat(targetText.replace(/[^0-9.]/g, ''));
+  if (!raw) return;
+
+  const duration = 1600;
+  const start    = performance.now();
+
+  function step(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    const cur  = ease * raw;
+    if (isRating)      el.textContent = cur.toFixed(1) + '★';
+    else if (isK)      el.textContent = Math.floor(cur) + 'k+';
+    else               el.textContent = Math.floor(cur) + '+';
+    if (p < 1) requestAnimationFrame(step);
+    else el.textContent = targetText;
+  }
+  requestAnimationFrame(step);
+}
+
+function initCounters() {
+  const bar = document.querySelector('.stats-bar');
+  if (!bar) return;
+  const seen = new IntersectionObserver((entries) => {
+    if (!entries[0].isIntersecting) return;
+    seen.disconnect();
+    bar.querySelectorAll('.stat-item strong').forEach(el => {
+      const original = el.textContent.trim();
+      el.textContent = original.includes('★') ? '0.0★'
+                     : original.includes('k')  ? '0k+'
+                     :                           '0+';
+      animateCounter(el, original);
+    });
+  }, { threshold: 0.6 });
+  seen.observe(bar);
+}
+
+// ===== WHATSAPP FAB VISIBILITY =====
+function initWppFab() {
+  const fab = document.getElementById('wppFab');
+  if (!fab) return;
+  const num = (LOJA_CONFIG.whatsapp || '5511999990000').replace(/\D/g, '');
+  fab.href = `https://wa.me/${num}`;
+  window.addEventListener('scroll', () => {
+    fab.classList.toggle('visible', window.scrollY > 300);
+  }, { passive: true });
+}
+
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', () => {
   const page = document.body.dataset.page;
@@ -584,6 +662,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initSearch();
   renderizarCarrinho();
   atualizarBadges();
+  initRevealAnimations();
+  initCounters();
+  initWppFab();
 
   if (page === 'home')     initHome();
   if (page === 'produtos') initProdutos();
